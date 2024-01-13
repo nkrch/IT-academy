@@ -107,10 +107,8 @@ function deleteThis() {
   var check = false;
   console.log(allDrinks);
   toFind = prompt("Введите название напитка");
-  for (let i = 0; i < allDrinks.length; i++) {
-    if (allDrinks[i].name1 == toFind) {
-      delete allDrinks[i];
-    }
-  }
+
+  allDrinks = allDrinks.splice(toFind, 1);
+
   showAllDrinks();
 }
