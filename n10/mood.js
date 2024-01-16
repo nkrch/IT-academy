@@ -13,16 +13,17 @@ function mood(colorsCount) {
     "синий",
     "фиолетовый",
   ];
-  var arr = [];
+
+  let colorName = [],
+    n;
   console.log("цветов: " + colorsCount);
   for (let i = 1; i <= colorsCount; i++) {
-    var n = randomDiap(1, 7);
-    while (arr.includes(n)) {
+    do {
       n = randomDiap(1, 7);
-    }
-    arr[arr.length] = n;
-    const colorName = colors[n];
-    console.log(colorName);
+    } while (colorName.includes(colors[n]));
+    colorName[i] = colors[n];
+
+    console.log(colorName[i]);
   }
 }
 
