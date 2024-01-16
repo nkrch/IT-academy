@@ -3,13 +3,15 @@
 function squareRoots(a, b, c) {
   const d = b * b - 4 * a * c; // дискриминант
 
+  if (a == 0) return [-c / b];
+
   if (d < 0) return []; // нет корней
-  else if (d == 0 && a != 0) return [-b / (2 * a)]; // один корень
-  else if (d > 0 && a != 0) {
-    const x1 = (-b + Math.sqrt(d)) / (2 * a);
-    const x2 = (-b - Math.sqrt(d)) / (2 * a);
-    return [x1, x2]; // два корня
-  }
+
+  if (d == 0) return [-b / (2 * a)]; // один корень
+
+  const x1 = (-b + Math.sqrt(d)) / (2 * a);
+  const x2 = (-b - Math.sqrt(d)) / (2 * a);
+  return [x1, x2]; // два корня
 }
 
 function squareRootsTests() {
