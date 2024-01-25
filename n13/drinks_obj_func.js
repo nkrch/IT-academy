@@ -1,32 +1,39 @@
-function ObjStorageFunc(name11, alcohol1, ingridients1) {
-  const self = this; // спасаем this и упрощаем себе жизнь
-  allDrinks = [];
-  this.name1 = name11; // публ. свойство - элемент объекта this/self
-  this.alcohol = alcohol1;
-  this.ingridients = ingridients1;
+allDrinks = {};
+class ObjStorageClass {
+  constructor(name1, alcohol, ingridients) {
+    this.name1 = name1;
+    this.alcohol = alcohol;
+    this.ingridients = ingridients;
+    /*allDrinks[allDrinks.length] = {
+      name1: name1,
+      alcohol: alcohol,
+      ingridients: ingridients,
+    };*/
+  }
 
-  this.addValue = function (key, value) {
+  addValue(key, value) {
     allDrinks[key] = value;
-  };
+  }
 
-  this.getValue = function (key) {
+  getValue(key) {
     // публ. метод - элемент объекта this/self
     return allDrinks[key];
-  };
+  }
 
-  this.deleteValue = function (key) {
+  deleteValue(key) {
     delete allDrinks[key];
     for (let i = key; i + 1 < allDrinks.length; i++) {
       allDrinks[i] = allDrinks[i + 1];
     }
     allDrinks[key] = allDrinks[key + 1];
-  };
-  this.getKeys = function () {
+  }
+
+  getKeys() {
     return Object.keys(allDrinks);
-  };
+  }
 }
 
-let margarita = new ObjStorageFunc();
+let margarita = new ObjStorageClass();
 /*(this.name1 = ""),
   (margarita.alcohol = true),
   (ingridients = )*/
@@ -40,7 +47,26 @@ allDrinks[allDrinks.length] = {
   ingridients: margarita.ingridients,
 };
 
-function inputFunc() {
+function showAllDrinks() {
+  const docBlock = document.getElementById("show");
+  var textCon = "";
+  allDrinks.forEach((element) => {
+    if (element.alcohol) {
+      var express = "да";
+    } else {
+      var express = "нет";
+    }
+    textCon += `
+    <h3>${element.name1}</h3>
+    напиток ${element.name1}
+    алкогольный: ${express}
+    рецепт приготовления:
+    ${element.ingridients}`;
+  });
+  docBlock.innerHTML = textCon;
+}
+
+function addInfo() {
   var name1 = prompt("Введите название напитка");
   var alcohol = confirm("Градусы присутствуют?");
   var ingridients = prompt("Введите рецепт");
@@ -60,25 +86,6 @@ function inputFunc() {
 рецепт приготовления:
 ${ingridients}`);
   showAllDrinks();
-}
-
-function showAllDrinks() {
-  const docBlock = document.getElementById("show");
-  var textCon = "";
-  allDrinks.forEach((element) => {
-    if (element.alcohol) {
-      var express = "да";
-    } else {
-      var express = "нет";
-    }
-    textCon += `
-    <h3>${element.name1}</h3>
-    напиток ${element.name1}
-    алкогольный: ${express}
-    рецепт приготовления:
-    ${element.ingridients}`;
-  });
-  docBlock.innerHTML = textCon;
 }
 
 function getInfo() {
@@ -103,7 +110,7 @@ function getInfo() {
   }
 }
 
-function deleteThis() {
+function deleteInfo() {
   var check = false;
   console.log(allDrinks);
   toFind = prompt("Введите название напитка");
@@ -112,3 +119,8 @@ function deleteThis() {
 
   showAllDrinks();
 }
+
+/*<button onclick="addInfo()">ввод информации о напитке</button>
+            <button onclick="getInfo()">получение информации о напитке</button>
+            <button onclick="deleteInfo()">удаление информации о напитке</button>
+            <button onclick="getAllInfo()">перечень всех напитков</button> */
