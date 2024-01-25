@@ -22,7 +22,6 @@ function mood(colorsCount) {
   let colorName = {},
     n,
     repeat = false;
-
   console.log("цветов: " + colorsCount);
   
   for (let i = 1; i <= colorsCount; i++) {
