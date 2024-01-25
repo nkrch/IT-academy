@@ -29,10 +29,8 @@ function mood(colorsCount) {
       repeat = false;
       n = randomDiap(1, 7);
       for (const key in colorName) {
-        if (colorName.hasOwnProperty.call(colorName, key)) {
-          if (colorName[key] == colors[n]) {
-            repeat = true;
-          }
+        if (colorName[key] == colors[n]) {
+          repeat = true;
         }
       }
     } while (repeat);
