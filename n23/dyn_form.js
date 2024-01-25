@@ -35,11 +35,6 @@ const formDef2 = [
   { label: "Возраст:", kind: "number", name: "age" },
   { caption: "Зарегистрироваться", kind: "submit" },
 ];
-let form = document.createElement("form");
-
-document
-  .getElementsByTagName("body")[0]
-  .insertAdjacentElement("afterbegin", form);
 
 function formBuild(formInputs) {
   let newForm = `<form action='https://fe.it-academy.by/TestForm.php'>`;
@@ -69,6 +64,16 @@ function formBuild(formInputs) {
         <select>${options}</select><br>`;
 
         break;
+      case "radio":
+        type = "radio";
+        let radiooptions = "";
+        for (let i = 0; i < formInputs[num].variants.length; i++) {
+          radiooptions += `
+            <input name='${formInputs[num].name}' value='${formInputs[num].variants[i].value}' type='${type}'>${formInputs[num].variants[i].text}</input>`;
+        }
+        newForm += `<label for='${formInputs[num].name}'>${formInputs[num].label}</label>
+          ${radiooptions}<br>`;
+        break;
       case "memo":
         type = "textarea";
 
@@ -90,7 +95,9 @@ function formBuild(formInputs) {
   }
 
   newForm += `</form><br><hr>`;
-  form.insertAdjacentHTML("beforeend", newForm);
+  document
+    .getElementsByTagName("body")[0]
+    .insertAdjacentHTML("beforeend", newForm);
 }
 
 formBuild(formDef1);
