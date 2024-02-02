@@ -1,109 +1,80 @@
-function ObjStorageFunc(name11, alcohol1, ingridients1) {
-  const self = this; // спасаем this и упрощаем себе жизнь
-  drinkStorage = {};
-  this.name1 = name11; // публ. свойство - элемент объекта this/self
-  this.alcohol = alcohol1;
-  this.ingridients = ingridients1;
+function ObjStorageFunc() {
+  var storage = {};
 
   this.addValue = function (key, value) {
-    drinkStorage[key] = value;
+    console.log(storage);
+    storage[key] = value;
   };
 
   this.getValue = function (key) {
-    // публ. метод - элемент объекта this/self
-    return drinkStorage[key];
+    if (storage[key]) {
+      return storage[key];
+    } else {
+      return false;
+    }
   };
 
   this.deleteValue = function (key) {
-    drinkStorage[key].delete;
-    /*for (let i = key; i + 1 < drinkStorage.length; i++) {
-      drinkStorage[i] = drinkStorage[i + 1];
+    if (storage[key]) {
+      delete storage[key];
+      return true;
+    } else {
+      return false;
     }
-    drinkStorage[key] = drinkStorage[key + 1];*/
-    drinkStorage = drinkStorage.filter(function (el) {
-      return el.name1 != "";
-    });
   };
   this.getKeys = function () {
-    return Object.keys(drinkStorage);
+    return Object.keys(storage);
   };
 }
-
-let margarita = new ObjStorageFunc();
-/*(this.name1 = ""),
-  (margarita.alcohol = true),
-  (ingridients = )*/
-
-margarita.name1 = "Маргарита";
-margarita.alcohol = true;
-margarita.ingridients = "продукт, продукт... смешать...";
-
-/*<button onclick="inputFunc()">ввод информации о напитке</button>
-            <button onclick="getInfo()">получение информации о напитке</button>
-            <button onclick="deleteThis()">удаление информации о напитке</button>
-            <button onclick="showdrinkStorage()">перечень всех напитков</button>
- */
+console.log(ObjStorageFunc.storage);
+let drinkStorage = new ObjStorageFunc();
 
 function inputFunc() {
-  let name1 = prompt("Введите название напитка");
-  let isAlcohol = confirm("Напиток является алкогольным?");
-  let isAlcoholString;
-  isAlcoholString = isAlcohol ? "да" : "нет";
-  let ingridients = prompt("Введите рецепт");
-
-  drinkStorage[name1] = {
-    name: name1,
-    alcohol: isAlcoholString,
-    ingridients: ingridients,
-  };
+  var name1 = prompt("Введите название напитка");
+  var isAlcohol = confirm("Напиток является алкогольным?");
+  let alcohol;
+  if (isAlcohol) {
+    alcohol = "да";
+  } else {
+    alcohol = "нет";
+  }
+  let ingridients = prompt("Введите рецепт напитка");
+  drinkStorage.addValue(name1, { alcohol, ingridients });
   console.log(drinkStorage);
 }
-
 function getInfo() {
-  let forSearch = prompt("Введите название напитка");
-  let isFound = false;
-  for (const key in drinkStorage) {
-    if (drinkStorage.hasOwnProperty.call(drinkStorage, key)) {
-      if (key == forSearch) {
-        alert(`Название напитка: ${key}
-Алкогольный ли: ${drinkStorage[key].alcohol}
-Рецепт: ${drinkStorage[key].ingridients}`);
-        isFound = true;
-      }
-    }
-  }
-  if (!isFound) {
+  var toFind = prompt("Введите название напитка");
+  var gotten = drinkStorage.getValue(toFind);
+  console.log(gotten);
+  if (!gotten) {
     alert("Напиток не найден");
+  } else {
+    alert(`
+    Название напитка: ${toFind}
+    Напиток алкогольный: ${gotten.alcohol}
+    Рецепт напитка: ${gotten.ingridients}`);
   }
 }
-function showDrinkStorage() {
-  let demonstration = "";
-  for (const key in drinkStorage) {
-    if (drinkStorage.hasOwnProperty.call(drinkStorage, key)) {
-      demonstration += `<h3>${key}</h3>
-      Название напитка: ${key}<br>
-      Алкогольный ли: ${drinkStorage[key].alcohol} <br>
-      Рецепт: ${drinkStorage[key].ingridients}<br>
-      `;
-    }
-  }
-  document.getElementById("show").innerHTML = demonstration;
-}
-
 function deleteThis() {
-  forSearch = prompt("Что нужно удалить?");
-  let isFound = false;
-  for (const key in drinkStorage) {
-    if (drinkStorage.hasOwnProperty.call(drinkStorage, key)) {
-      if (key == forSearch) {
-        delete drinkStorage[key];
-        isFound = true;
-      }
-    }
-  }
-  if (!isFound) {
+  var toFind = prompt("Введите название напитка");
+  var gotten = drinkStorage.deleteValue(toFind);
+  if (!gotten) {
     alert("Напиток не найден");
   }
   console.log(drinkStorage);
-  showDrinkStorage();
+}
+
+function showDrinkStorage() {
+  var stringOfAll = "";
+  var keys = drinkStorage.getKeys();
+  for (let i = 0; i < keys.length; i++) {
+    var element = drinkStorage.getValue(keys[i]);
+    console.log(element);
+    stringOfAll += `
+    <h3>${keys[i]}</h3>
+    Напиток алкогольный: ${element.alcohol}<br>
+    Рецепт напитка: ${element.ingridients}`;
+  }
+
+  document.getElementById("show").innerHTML = stringOfAll;
 }
