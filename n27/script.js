@@ -7,16 +7,16 @@ listeningElems += document.getElementsByTagNameNS(
   "select"
 );
 
-/*developers
-siteName
-siteURL
-dateOfStart
-siteVisites
-email
+/*developers - валидация на размер строки
+siteName - валидация на размер строки
+siteURL - валидация на размер строки
+dateOfStart  - валидация на корректность даты и на не слишком раннюю дату запуска 
+siteVisites - валидация на размер строки
+email - валидация на размер строки
 category
-radio
+radio - валидация на наличие выбора
 responces
-description
+description - валидация на размер строки
 submit*/
 
 var form = document.getElementsByName("form")[0];
