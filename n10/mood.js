@@ -23,7 +23,7 @@ function mood(colorsCount) {
     n,
     repeat = false;
   console.log("цветов: " + colorsCount);
-  
+
   for (let i = 1; i <= colorsCount; i++) {
     do {
       repeat = false;
@@ -34,10 +34,9 @@ function mood(colorsCount) {
         }
       }
     } while (repeat);
-    colorName[i] = colors[n];
-
-    console.log(colorName[i]);
+    colorName[n] = colors[n]; //ключ - номер цвета
   }
+  console.log(colorName);
 }
 
 mood(3);
