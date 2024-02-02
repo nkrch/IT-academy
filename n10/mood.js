@@ -35,6 +35,7 @@ function mood(colorsCount) {
       }
     } while (repeat);
     colorName[n] = colors[n]; //ключ - номер цвета
+    console.log(colorName[n]);
   }
   console.log(colorName);
 }
