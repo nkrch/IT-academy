@@ -2,30 +2,31 @@ function ObjStorageFunc() {
   var storage = {};
 
   this.addValue = function (key, value) {
-    this[key] = value;
+    console.log(storage);
+    storage[key] = value;
   };
 
   this.getValue = function (key) {
-    if (this[key]) {
-      return this[key];
+    if (storage[key]) {
+      return storage[key];
     } else {
       return false;
     }
   };
 
   this.deleteValue = function (key) {
-    if (this[key]) {
-      delete this[key];
+    if (storage[key]) {
+      delete storage[key];
       return true;
     } else {
       return false;
     }
   };
   this.getKeys = function () {
-    return Object.keys(this);
+    return Object.keys(storage);
   };
 }
-
+console.log(ObjStorageFunc.storage);
 let drinkStorage = new ObjStorageFunc();
 
 function inputFunc() {
@@ -62,20 +63,18 @@ function deleteThis() {
   }
   console.log(drinkStorage);
 }
+
 function showDrinkStorage() {
   var stringOfAll = "";
-  for (const key in drinkStorage) {
-    if (
-      key != "addValue" &&
-      key != "deleteValue" &&
-      key != "getKeys" &&
-      key != "getValue"
-    ) {
-      stringOfAll += `
-    <h3>${key}</h3>
-    Напиток алкогольный: ${drinkStorage[key].alcohol}<br>
-    Рецепт напитка: ${drinkStorage[key].ingridients}<br>`;
-    }
+  var keys = drinkStorage.getKeys();
+  for (let i = 0; i < keys.length; i++) {
+    var element = drinkStorage.getValue(keys[i]);
+    console.log(element);
+    stringOfAll += `
+    <h3>${keys[i]}</h3>
+    Напиток алкогольный: ${element.alcohol}<br>
+    Рецепт напитка: ${element.ingridients}`;
   }
+
   document.getElementById("show").innerHTML = stringOfAll;
 }
