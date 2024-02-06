@@ -14,11 +14,6 @@ function mood(colorsCount) {
     "фиолетовый",
   ];
 
-  if (colorsCount > 7) {
-    alert("You cannot get more than 7 colors");
-    throw console.error("You cannot get more than 7 colors");
-  }
-
   let colorName = {},
     n,
     repeat = false;
@@ -28,10 +23,8 @@ function mood(colorsCount) {
     do {
       repeat = false;
       n = randomDiap(1, 7);
-      for (const key in colorName) {
-        if (colorName[key] == colors[n]) {
-          repeat = true;
-        }
+      if (n in colorName) {
+        repeat = true;
       }
     } while (repeat);
     colorName[n] = colors[n]; //ключ - номер цвета
