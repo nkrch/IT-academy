@@ -1,3 +1,11 @@
 p{
     color: rgb(124, 1, 1);
 }
+div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+input{
+    margin-right: 10px;
+}
