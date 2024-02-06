@@ -7,16 +7,16 @@ listeningElems += document.getElementsByTagNameNS(
   "select"
 );
 
-/*developers - валидация на размер строки
-siteName - валидация на размер строки
-siteURL - валидация на размер строки
-dateOfStart  - валидация на корректность даты и на не слишком раннюю дату запуска 
-siteVisites - валидация на размер строки
-email - валидация на размер строки
+/*developers
+siteName
+siteURL
+dateOfStart
+siteVisites
+email
 category
-radio - валидация на наличие выбора
+radio
 responces
-description - валидация на размер строки
+description
 submit*/
 
 var form = document.getElementsByName("form")[0];
@@ -49,6 +49,7 @@ function mistake(num, mist) {
 }
 
 function main(num) {
+  var hasError = false;
   console.log(num);
   //if (event.key === "Enter") {
   console.log("enter");
@@ -59,6 +60,7 @@ function main(num) {
       console.log(toCheck);
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
+        hasError = true;
         mistake(num, mist);
       } else {
         var mist = "";
@@ -70,6 +72,7 @@ function main(num) {
       var toCheck = form[num].value;
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
+        hasError = true;
         mistake(num, mist);
       } else {
         var mist = "";
@@ -80,6 +83,7 @@ function main(num) {
       var toCheck = form[num].value;
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
+        hasError = true;
         mistake(num, mist);
       } else {
         var mist = "";
@@ -91,9 +95,11 @@ function main(num) {
 
       if (toCheck.length < 8) {
         var mist = "Введите дату в корректном формате";
+        hasError = true;
         mistake(num, mist);
       } else if (toCheck < "1970-01-01") {
         var mist = "Вы не могли запустить сайт ранее 1970";
+        hasError = true;
         mistake(num, mist);
       } else {
         var mist = "";
@@ -105,9 +111,11 @@ function main(num) {
       var toCheck = form[num].value;
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
+        hasError = true;
         mistake(num, mist);
       } else if (typeof Number(toCheck) != "number") {
         var mist = "Вы ввели не номер";
+        hasError = true;
         mistake(num, mist);
       } else {
         var mist = "";
@@ -118,6 +126,7 @@ function main(num) {
       var toCheck = form[num].value;
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
+        hasError = true;
         mistake(num, mist);
       } else {
         var mist = "";
@@ -140,6 +149,7 @@ function main(num) {
       }
       if (!checked) {
         var mist = "Выберите вариант";
+        hasError = true;
         mistake(7, mist);
       } else {
         var mist = "";
@@ -161,6 +171,7 @@ function main(num) {
       }
       if (!checked) {
         var mist = "Выберите вариант";
+        hasError = true;
         mistake(7, mist);
       } else {
         var mist = "";
@@ -172,13 +183,44 @@ function main(num) {
       var toCheck = document.getElementsByTagName("textarea")[0].value;
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
+        hasError = true;
         mistake(8, mist);
       }
       break;
 
     default:
+      console.log("check 10");
       break;
   }
   //if (num != 6) form[num + 1].focus();
   //}
+  return hasError;
+}
+
+function prevent(event) {
+  event.preventDefault(); // отменяем стандартное поведение формы
+  // выполнение дополнительной обработки
+  console.log("Форма не отправлена!");
+}
+var eventListener = form.addEventListener("submit", prevent);
+
+function validation() {
+  //form.preventDefault();
+  var hasError = false;
+  //document.getElementById("submit").preventDefault();
+  console.log("validation");
+  for (let i = 0; i <= 10; i++) {
+    if (main(i)) hasError = true;
+  }
+  if (!hasError) {
+    console.log(hasError + "success");
+
+    /*form.addEventListener("submit", function (event) {
+      event.preventDefault = false; // отменяем стандартное поведение формы
+      // выполнение дополнительной обработки
+      console.log("Форма отправлена!");
+    });*/
+
+    form.removeEventListener("submit", prevent);
+  }
 }
