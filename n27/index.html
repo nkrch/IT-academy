@@ -68,9 +68,9 @@
         <div>
             <label for="radio">Размещение:</label>
 
-            <input type="radio" name="radio"  onblur="main(8,event)" class="radio" id="free" value="1">бесплатное</input>
-            <input type="radio" name="radio"  onblur="main(8,event)" class="radio" id="pay" value="1">платное</input>
-            <input type="radio" name="radio"  onblur="main(8,event)" class="radio" id="vip" value="1">VIP</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="free" value="1">бесплатное</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="pay" value="1">платное</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="vip" value="1">VIP</input>
             <p id="radio"></p>
         </div>
 
@@ -78,10 +78,14 @@
         <label for="responces">Разрешить отзывы:</label>
         <input type="checkbox" name="responces" id="checkbox" onclick="main(8,event)">
         <br><br>
+
         <label for="description">Описание сайта:</label>
-        <br><textarea name="description" cols="30" rows="10"  id="a" onblur="main(7,event);main(9,event)"></textarea>
+        <div>
+            <br><textarea name="description" cols="30" rows="10"  id="a" onblur="main(7,event);main(9,event)"></textarea>
         <p></p>
-        <br><button type="submit" onclick="validation()">Опубликовать</button>
+        </div>
+        
+        <br><button type="submit" id="submit" onclick="validation()">Опубликовать</button>
     </form>
 </body>
 <script src="script.js"></script>
