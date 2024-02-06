@@ -1,226 +1,89 @@
-var listeningElems = [];
-var p = document.getElementsByTagName("p");
-console.log(p);
-listeningElems += document.getElementsByTagNameNS(
-  "input",
-  "textarea",
-  "select"
-);
+<!DOCTYPE html>
+<html lang="en">
 
-/*developers
-siteName
-siteURL
-dateOfStart
-siteVisites
-email
-category
-radio
-responces
-description
-submit*/
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALID_FORM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-var form = document.getElementsByName("form")[0];
-console.log(form);
-form[0].focus();
-var developers = document.getElementsByName("developers");
-var formObject = {};
 
-for (let i = 0; i < form.length; i++) {
-  formObject[form[i].name] = document.getElementsByName(form[i].name)[0];
-  //console.log(formObject[form[i].name]);
-}
-console.log(form.length);
-for (i = 0; i < form.length; i++) {
-  form[i].addEventListener("keypress", function (event) {
-    // If the user presses the "Enter" key on the keyboard
-    if (event.key === "Enter" || event.key === "Down") {
-      // Cancel the default action, if needed
-      event.preventDefault();
-      blur(form[i]);
-    }
-  });
-}
+<body>
+    <form name="form" action="https://fe.it-academy.by/TestForm.php">
 
-function mistake(num, mist) {
-  p[num].innerText = "!" + mist + "!";
-  if (mist == "") {
-    p[num].innerText = mist;
-  }
-}
+        <div>
+            <label for="developers">Разработчики:</label>
+            <input type="text" name="developers" onblur="main(0,event)"  onclick="this.focus()">
+            <p></p>
+        </div>
 
-function main(num) {
-  var hasError = false;
-  console.log(num);
-  //if (event.key === "Enter") {
-  console.log("enter");
+        <div>
+            <label for="siteName">Название сайта:</label>
+            <input type="text" name="siteName" onblur="main(1,event)" >
+            <p></p>
+        </div>
 
-  switch (num) {
-    case 0:
-      var toCheck = form[num].value;
-      console.log(toCheck);
-      if (toCheck.length < 1) {
-        var mist = "Вы ввели слишком маленькую строку";
-        hasError = true;
-        mistake(num, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
 
-      break;
-    case 1:
-      var toCheck = form[num].value;
-      if (toCheck.length < 1) {
-        var mist = "Вы ввели слишком маленькую строку";
-        hasError = true;
-        mistake(num, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
-      break;
-    case 2:
-      var toCheck = form[num].value;
-      if (toCheck.length < 1) {
-        var mist = "Вы ввели слишком маленькую строку";
-        hasError = true;
-        mistake(num, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
-      break;
-    case 3:
-      var toCheck = form[num].value;
 
-      if (toCheck.length < 8) {
-        var mist = "Введите дату в корректном формате";
-        hasError = true;
-        mistake(num, mist);
-      } else if (toCheck < "1970-01-01") {
-        var mist = "Вы не могли запустить сайт ранее 1970";
-        hasError = true;
-        mistake(num, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
 
-      break;
-    case 4:
-      var toCheck = form[num].value;
-      if (toCheck.length < 1) {
-        var mist = "Вы ввели слишком маленькую строку";
-        hasError = true;
-        mistake(num, mist);
-      } else if (typeof Number(toCheck) != "number") {
-        var mist = "Вы ввели не номер";
-        hasError = true;
-        mistake(num, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
-      break;
-    case 5:
-      var toCheck = form[num].value;
-      if (toCheck.length < 1) {
-        var mist = "Вы ввели слишком маленькую строку";
-        hasError = true;
-        mistake(num, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
-      break;
-    case 6:
-      console.log("ok");
-      //document.getElementsByClassName("radio").focus();
+        <div>
+            <label for="siteURL">URL сайта:</label>
+            <input type="url" name="siteURL" onblur="main(2,event)" >
+            <p></p>
+        </div>
 
-      /*document.getElementById("free").focus();
-      document.getElementById("free").click();
-*/
-      var rad = document.getElementsByClassName("radio");
-      var checked = false;
-      for (let i = 0; i < rad.length; i++) {
-        if (rad[i].value) {
-          checked = true;
-        }
-      }
-      if (!checked) {
-        var mist = "Выберите вариант";
-        hasError = true;
-        mistake(7, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
-      break;
-    case 7:
-      break;
-    case 8:
-      //document.getElementById("checkbox").click();
+        <div>
+            <label for="dateOfStart">Дата запуска сайта:</label>
+            <input type="date" name="dateOfStart" onblur="main(3,event)" >
+            <p></p>
+        </div>
 
-      var rad = document.getElementsByClassName("radio");
-      var checked = false;
-      for (let i = 0; i < rad.length; i++) {
-        console.log(rad[i].value);
-        if (rad[i].checked) {
-          checked = true;
-        }
-      }
-      if (!checked) {
-        var mist = "Выберите вариант";
-        hasError = true;
-        mistake(7, mist);
-      } else {
-        var mist = "";
-        mistake(num, mist);
-      }
-      //document.getElementsByTagName("textarea")[0].focus();
-      break;
-    case 9:
-      var toCheck = document.getElementsByTagName("textarea")[0].value;
-      if (toCheck.length < 1) {
-        var mist = "Вы ввели слишком маленькую строку";
-        hasError = true;
-        mistake(8, mist);
-      }
-      break;
+        <div>
+            <label for="siteVisites">Посетителей в сутки:</label>
+            <input type="number" name="siteVisites" onblur="main(4,event)" >
+            <p></p>
+        </div>
 
-    default:
-      console.log("check 10");
-      break;
-  }
-  //if (num != 6) form[num + 1].focus();
-  //}
-  return hasError;
-}
+        <div>
+            <label for="email">E-mail для связи:</label>
+            <input type="text" name="email" onblur="main(5,event)" >
+            <p></p>
+        </div>
 
-function prevent(event) {
-  event.preventDefault(); // отменяем стандартное поведение формы
-  // выполнение дополнительной обработки
-  console.log("Форма не отправлена!");
-}
-var eventListener = form.addEventListener("submit", prevent);
+        <div>
+            <label for="category">Рубрика каталога:</label>
+            <select name="category" id="category" onblur="main(6,event)" 
+                onclick="main(6,event)">
+                <option value="1" onblur="main(6,event)"  onclick="main(6,event)">здоровье
+                </option>
+                <option value="2" onblur="main(6,event)"  onclick="main(6,event)">домашний уют
+                </option>
+                <option value="3" onblur="main(6,event)"  onclick="main(6,event)" selected>
+                    бытовая техника</option>
+            </select>
+            <p></p>
+        </div>
 
-function validation() {
-  //form.preventDefault();
-  var hasError = false;
-  //document.getElementById("submit").preventDefault();
-  console.log("validation");
-  for (let i = 0; i <= 10; i++) {
-    if (main(i)) hasError = true;
-  }
-  if (!hasError) {
-    console.log(hasError + "success");
+        <div>
+            <label for="radio">Размещение:</label>
 
-    /*form.addEventListener("submit", function (event) {
-      event.preventDefault = false; // отменяем стандартное поведение формы
-      // выполнение дополнительной обработки
-      console.log("Форма отправлена!");
-    });*/
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="free" value="1">бесплатное</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="pay" value="1">платное</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="vip" value="1">VIP</input>
+            <p id="radio"></p>
+        </div>
 
-    form.removeEventListener("submit", prevent);
-  }
-}
+
+        <label for="responces">Разрешить отзывы:</label>
+        <input type="checkbox" name="responces" id="checkbox" onclick="main(8,event)">
+        <br><br>
+        <label for="description">Описание сайта:</label>
+        <br><textarea name="description" cols="30" rows="10"  id="a" onblur="main(7,event);main(9,event)"></textarea>
+        <p></p>
+        <br><button type="submit" id="submit" onclick="validation()">Опубликовать</button>
+    </form>
+</body>
+<script src="script.js"></script>
+
+</html>
