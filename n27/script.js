@@ -1,5 +1,7 @@
 var listeningElems = [];
 var p = document.getElementsByTagName("p");
+var isChanged = false,
+  isChanged1 = false;
 console.log(p);
 listeningElems += document.getElementsByTagNameNS(
   "input",
@@ -140,6 +142,15 @@ function main(num) {
       /*document.getElementById("free").focus();
       document.getElementById("free").click();
 */
+
+      var toCheck = form[num].value;
+      if (toCheck == "3") {
+        console.log("!!!!!");
+        const mist = "help";
+        console.log(p[6]);
+        p[6].innerText = mist;
+        console.log(p[6]);
+      }
       var rad = document.getElementsByClassName("radio");
       var checked = false;
       for (let i = 0; i < rad.length; i++) {
@@ -207,11 +218,15 @@ var eventListener = form.addEventListener("submit", prevent);
 function validation() {
   //form.preventDefault();
   var hasError = false;
+
   //document.getElementById("submit").preventDefault();
   console.log("validation");
   for (let i = 0; i <= 10; i++) {
     if (main(i)) hasError = true;
   }
+  if (!isChanged) p[6].innerText = "Начальное значение ошибочно";
+  if (!isChanged1)
+    document.getElementById("resp").innerText = "Начальное значение ошибочно";
   if (!hasError) {
     console.log(hasError + "success");
 
