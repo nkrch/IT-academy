@@ -7,15 +7,15 @@ function ObjStorageFunc() {
   };
 
   this.getValue = function (key) {
-    if (storage[key]) {
+    if (key in storage) {
       return storage[key];
     } else {
-      return false;
+      return undefined;
     }
   };
 
   this.deleteValue = function (key) {
-    if (storage[key]) {
+    if (key in storage) {
       delete storage[key];
       return true;
     } else {
