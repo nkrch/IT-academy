@@ -263,11 +263,11 @@ function main(num) {
           console.log("jjhhbgvbtdbf c fc ggh");
           form[11].focus();
           isFirstError = true;
-        } else {
-          mist = "";
         }
-        mistake(8, mist);
+      } else {
+        mist = "";
       }
+      mistake(8, mist);
       break;
 
     default:
