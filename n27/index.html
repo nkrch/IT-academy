@@ -14,13 +14,13 @@
 
         <div>
             <label for="developers">Разработчики:</label>
-            <input tabindex="0" type="text" name="developers" onblur="main(0,event)"  onclick="this.focus()">
+            <input type="text" name="developers" onblur="main(0,'event')"  onclick="this.focus()">
             <p></p>
         </div>
 
         <div>
             <label for="siteName">Название сайта:</label>
-            <input tabindex="1" type="text" name="siteName" onblur="main(1,event)" >
+            <input type="text" name="siteName" onblur="main(1,'event')" >
             <p></p>
         </div>
 
@@ -53,7 +53,7 @@
 
         <div>
             <label for="category">Рубрика каталога:</label>
-            <select name="category" id="category" onblur="main(6,event)" onclick="isChanged = true;"
+            <select name="category" id="category" onchange="main(6,event)" onclick="isChanged = true;"
                 onclick="main(6,event)">
                 <option value="1" onblur="main(6,event)"  onclick="main(6,event)">здоровье
                 </option>
@@ -77,7 +77,7 @@
         <div>
             <label for="responces" onclick="isChanged1=true;">Разрешить отзывы:</label>
         
-        <input type="checkbox" name="responces" id="checkbox" onclick="main(8,event); isChanged1=true">
+        <input type="checkbox" name="responces" id="checkbox" onchange="main(8,event); isChanged1=true">
         <article id="resp"></article>
         </div>
        
