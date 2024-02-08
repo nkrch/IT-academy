@@ -60,7 +60,7 @@ function clckForm1() {
 }
 
 var isFirstError = false;
-function main(num) {
+function main(num, isValid) {
   var hasError = false;
 
   console.log(num);
@@ -76,7 +76,7 @@ function main(num) {
         hasError = true;
         mistake(num, mist);
 
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[0].focus();
           isFirstError = true;
         }
@@ -92,7 +92,7 @@ function main(num) {
         var mist = "Вы ввели слишком маленькую строку";
         hasError = true;
         mistake(num, mist);
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[1].focus();
           isFirstError = true;
         }
@@ -108,7 +108,7 @@ function main(num) {
         var mist = "Вы ввели слишком маленькую строку";
         hasError = true;
         mistake(num, mist);
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[2].focus();
           isFirstError = true;
         }
@@ -126,7 +126,7 @@ function main(num) {
         hasError = true;
         mistake(num, mist);
 
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[3].focus();
           isFirstError = true;
         }
@@ -151,7 +151,7 @@ function main(num) {
         var mist = "Вы ввели слишком маленькую строку";
         hasError = true;
 
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[4].focus();
           isFirstError = true;
         }
@@ -176,7 +176,7 @@ function main(num) {
         var mist = "Вы ввели слишком маленькую строку";
         hasError = true;
 
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[5].focus();
           isFirstError = true;
         }
@@ -197,7 +197,7 @@ function main(num) {
       var toCheck = form[num].value;
       if (toCheck == "3") {
         console.log("!!!!!");
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           form[6].focus();
           isFirstError = true;
         }
@@ -240,7 +240,7 @@ function main(num) {
         var mist = "Выберите вариант";
         hasError = true;
 
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           console.log("jjhhbgvbtdbf c fc ggh");
           clckForm();
           isFirstError = true;
@@ -259,7 +259,7 @@ function main(num) {
       if (toCheck.length < 1) {
         var mist = "Вы ввели слишком маленькую строку";
         hasError = true;
-        if (!isFirstError) {
+        if (!isFirstError && isValid == "0case") {
           console.log("jjhhbgvbtdbf c fc ggh");
           form[11].focus();
           isFirstError = true;
@@ -293,7 +293,7 @@ function validation() {
   //document.getElementById("submit").preventDefault();
   console.log("validation");
   for (let i = 0; i <= 10; i++) {
-    if (main(i)) {
+    if (main(i, "0case")) {
       hasError = true;
     }
 
