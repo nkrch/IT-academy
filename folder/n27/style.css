@@ -1,5 +1,6 @@
-p{
+p,article{
     color: rgb(124, 1, 1);
+    margin: 0;
 }
 div{
     display: flex;

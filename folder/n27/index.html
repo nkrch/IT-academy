@@ -9,18 +9,18 @@
 </head>
 
 
-<body>
+<body onclick="console.log(event)">
     <form name="form" action="https://fe.it-academy.by/TestForm.php">
 
         <div>
             <label for="developers">Разработчики:</label>
-            <input type="text" name="developers" onblur="main(0,event)"  onclick="this.focus()">
+            <input type="text" name="developers" onblur="main(0,'event')"  onclick="this.focus()">
             <p></p>
         </div>
 
         <div>
             <label for="siteName">Название сайта:</label>
-            <input type="text" name="siteName" onblur="main(1,event)" >
+            <input type="text" name="siteName" onblur="main(1,'event')" >
             <p></p>
         </div>
 
@@ -53,7 +53,7 @@
 
         <div>
             <label for="category">Рубрика каталога:</label>
-            <select name="category" id="category" onblur="main(6,event)" 
+            <select name="category" id="category" onchange="main(6,event)" onclick="isChanged = true;"
                 onclick="main(6,event)">
                 <option value="1" onblur="main(6,event)"  onclick="main(6,event)">здоровье
                 </option>
@@ -62,7 +62,7 @@
                 <option value="3" onblur="main(6,event)"  onclick="main(6,event)" selected>
                     бытовая техника</option>
             </select>
-            <p></p>
+            <p id="categoryP"></p>
         </div>
 
         <div>
@@ -74,10 +74,13 @@
             <p id="radio"></p>
         </div>
 
-
-        <label for="responces">Разрешить отзывы:</label>
-        <input type="checkbox" name="responces" id="checkbox" onclick="main(8,event)">
-        <br><br>
+        <div>
+            <label for="responces" onclick="isChanged1=true;">Разрешить отзывы:</label>
+        
+        <input type="checkbox" name="responces" id="checkbox" onchange="main(8,event); isChanged1=true">
+        <article id="resp"></article>
+        </div>
+       
 
         <label for="description">Описание сайта:</label>
         <div>
