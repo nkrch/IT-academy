@@ -224,6 +224,10 @@ function main(num, isValid) {
       }
       break;
     case 7:
+      if (!isChanged1)
+        document.getElementById("resp").innerText =
+          "Начальное значение ошибочно";
+      else document.getElementById("resp").innerText = "";
       break;
     case 8:
       //document.getElementById("checkbox").click();
@@ -251,10 +255,7 @@ function main(num, isValid) {
         var mist = "";
         mistake(7, mist);
       }
-      if (!isChanged1)
-        document.getElementById("resp").innerText =
-          "Начальное значение ошибочно";
-      else document.getElementById("resp").innerText = "";
+
       //document.getElementsByTagName("textarea")[0].focus();
       break;
     case 9:
