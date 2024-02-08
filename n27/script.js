@@ -249,9 +249,12 @@ function main(num, isValid) {
         mistake(7, mist);
       } else {
         var mist = "";
-        mistake(num, mist);
+        mistake(7, mist);
       }
-
+      if (!isChanged1)
+        document.getElementById("resp").innerText =
+          "Начальное значение ошибочно";
+      else document.getElementById("resp").innerText = "";
       //document.getElementsByTagName("textarea")[0].focus();
       break;
     case 9:
@@ -303,7 +306,11 @@ function validation() {
       isFirstFocused = true;
     }*/
   }
-  if (!isChanged) p[6].innerText = "Начальное значение ошибочно";
+  if (!isChanged) {
+    p[6].innerText = "Начальное значение ошибочно";
+  } else {
+    p[6].innerText = "";
+  }
   if (!isChanged1)
     document.getElementById("resp").innerText = "Начальное значение ошибочно";
   else document.getElementById("resp").innerText = "";
