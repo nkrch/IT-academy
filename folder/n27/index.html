@@ -68,14 +68,14 @@
         <div>
             <label for="radio">Размещение:</label>
 
-            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="free" value="1">бесплатное</input>
-            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="pay" value="1">платное</input>
-            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onblur="main(8,event)" class="radio" id="vip" value="1">VIP</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onchange="main(8,event)" class="radio" id="free" value="1">бесплатное</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onchange="main(8,event)" class="radio" id="pay" value="1">платное</input>
+            <input type="radio" name="radio"  onclick="checked=true;mistake(7,'')" onchange="main(8,event)" class="radio" id="vip" value="1">VIP</input>
             <p id="radio"></p>
         </div>
 
         <div>
-            <label for="responces" onclick="isChanged1=true;">Разрешить отзывы:</label>
+            <label for="responces">Разрешить отзывы:</label>
         
         <input type="checkbox" name="responces" id="checkbox" onchange="main(8,event); isChanged1=true">
         <article id="resp"></article>
