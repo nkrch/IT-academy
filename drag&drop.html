@@ -47,8 +47,8 @@ for (let i = 0; i < images.length; i++) {
     console.log(images[3])
     bufWidth+=images[i].offsetWidth;
     
-    images[i].style.bottom='380px';
-    
+    console.log(images[i].offsetHeight)
+    images[i].style.top=262-images[i].offsetHeight+'px';
   images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
   images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
   //images[i].style.zIndex = i; //присваиваем каждому z-index
