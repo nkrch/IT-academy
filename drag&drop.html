@@ -1,110 +1,116 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset=UTF-8>
+    <meta charset="UTF-8" />
     <title>drag&amp;drop</title>
   </head>
-  <body style='min-height: 100vh;'>
-    
-<img src='http://fe.it-academy.by/Sites/0000007/sax.jpg'>
-<img src='http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png' width=100>
-<img src='http://fe.it-academy.by/Sites/0000007/Man-and-woman.png' width=150>
-<img src='http://fe.it-academy.by/Sites/0000007/No_smoking.png' style='padding-left: 50px'>
+  <body style="min-height: 100vh">
+    <img src="http://fe.it-academy.by/Sites/0000007/sax.jpg" />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png"
+      width="100"
+    />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/Man-and-woman.png"
+      width="150"
+    />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/No_smoking.png"
+      style="padding-left: 50px"
+    />
 
-<script>
-  // здесь ваш код
-  const images = document.getElementsByTagName("img");
-  console.log(images[2].offsetLeft)
-  let pictureWidth=0;
-  var imagesOffsetX=[], imagesOffsetY=[];
-  for (let i = 0; i < images.length; i++) {
-    imagesOffsetX[i]=images[i].offsetLeft;
-    imagesOffsetY[i]=images[i].offsetTop;
-  console.log(imagesOffsetX);
-  console.log(imagesOffsetY)
-  }
+    <script>
+      // здесь ваш код
 
-  for (let i = 0; i < images.length; i++){
-    //настройка для абсолютного позиционирования и отображения как в изначальном варианте
-        images[i].style.position='absolute';
-        images[i].style.left=imagesOffsetX[i]+'px';
-        images[i].style.top=imagesOffsetY[i]+'px';
-        
-        console.log(images[3])
-        //bufWidth+=images[i].offsetWidth;
-        
-      
-      images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
-      images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
-      //images[i].style.zIndex = i; //присваиваем каждому z-index
+      const images = document.getElementsByTagName("img");
+      console.log(document.readyState);
 
-  }
-    
+      document.onload = function () {
+        console.log("imagesLoaded");
 
+        console.log(images[2].offsetLeft);
 
+        var imagesOffsetX = [],
+          imagesOffsetY = [];
+        //console.log(images[3].onload)
+        for (let i = 0; i < images.length; i++) {
+          imagesOffsetX[i] = images[i].offsetLeft;
+          imagesOffsetY[i] = images[i].offsetTop;
+          console.log(imagesOffsetX);
+          console.log(imagesOffsetY);
+          //настройка для абсолютного позиционирования и отображения как в изначальном варианте
+          images[i].style.position = "absolute";
+          images[i].style.left = imagesOffsetX[i] + "px";
+          images[i].style.top = imagesOffsetY[i] + "px";
 
-window.addEventListener("mousemove", mouseMove);
+          
+        }
+      };
 
-function mouseMove(event) {
-  if (Mouse.left) {
-    Mouse.posX = event.clientX; // текущая координата по оси Х
-    Mouse.posY = event.clientY; // текущая координата по оси Y
-    imageMove();
-  }
-}
+      for (let i = 0; i < images.length; i++) {
+        images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
+        images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
+        //images[i].style.zIndex = i; //присваиваем каждому z-index
+      }
+      window.addEventListener("mousemove", mouseMove);
 
-//введём объект, который будет хранить в себе целевое изображение, начальные и настоящие x и y, нажата ли кнопка мыши, исконный zIndex
-let Mouse = {
-  targetImage: null,
-  posX: null,
-  posY: null,
-  dx: null,
-  dy: null,
-  left: false,
-  zIndexBuf: null, //для запоминания положения на странице
-};
+      function mouseMove(event) {
+        if (Mouse.left) {
+          Mouse.posX = event.clientX; // текущая координата по оси Х
+          Mouse.posY = event.clientY; // текущая координата по оси Y
+          imageMove();
+        }
+      }
 
+      //введём объект, который будет хранить в себе целевое изображение, начальные и настоящие x и y, нажата ли кнопка мыши, исконный zIndex
+      let Mouse = {
+        targetImage: null,
+        posX: null,
+        posY: null,
+        dx: null,
+        dy: null,
+        left: false,
+        zIndexBuf: null, //для запоминания положения на странице
+      };
 
-function imageMouseDown(event) {
-  if (event.button == 0) {
-    this.style.cursor = "pointer";
-    event.preventDefault();
-    Mouse.targetImage = this;
-    Mouse.zIndexBuf = this.style.zIndex;
-    console.log(Mouse.zIndexBuf);
-    this.style.zIndex = 5;
+      function imageMouseDown(event) {
+        if (event.button == 0) {
+          this.style.cursor = "pointer";
+          event.preventDefault();
+          Mouse.targetImage = this;
+          Mouse.zIndexBuf = this.style.zIndex;
+          console.log(Mouse.zIndexBuf);
+          this.style.zIndex = 5;
 
-    Mouse.left = true;
+          Mouse.left = true;
 
-    //где событие
-    Mouse.posX = event.clientX;
-    Mouse.posY = event.clientY;
+          //где событие
+          Mouse.posX = event.clientX;
+          Mouse.posY = event.clientY;
 
-    Mouse.dx = event.layerX;
-    console.log(Mouse.dx, Mouse.posX);
-    Mouse.dy = event.layerY;
+          Mouse.dx = event.layerX;
+          console.log(Mouse.dx, Mouse.posX);
+          Mouse.dy = event.layerY;
 
-    imageMove();
-  }
-}
+          imageMove();
+        }
+      }
 
-function imageMouseUp() {
-  this.style.cursor = "default";
-  Mouse.left = false;
-  this.style.zIndex = Mouse.zIndexBuf;
-  Mouse.targetImage = null;
-  Mouse.zIndexBuf = null;
-}
+      function imageMouseUp() {
+        this.style.cursor = "default";
+        Mouse.left = false;
+        this.style.zIndex = Mouse.zIndexBuf;
+        Mouse.targetImage = null;
+        Mouse.zIndexBuf = null;
+      }
 
-function imageMove() {
-  if (Mouse.left) {
-    //двигаем изображение
-    Mouse.targetImage.style.top = Mouse.posY - Mouse.dy + "px";
-    Mouse.targetImage.style.left = Mouse.posX - Mouse.dx + "px";
-  }
-}
-
-</script>
-
+      function imageMove() {
+        if (Mouse.left) {
+          //двигаем изображение
+          Mouse.targetImage.style.top = Mouse.posY - Mouse.dy + "px";
+          Mouse.targetImage.style.left = Mouse.posX - Mouse.dx + "px";
+        }
+      }
+    </script>
   </body>
 </html>
