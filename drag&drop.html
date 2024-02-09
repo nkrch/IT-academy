@@ -14,6 +14,34 @@
 <script>
   // здесь ваш код
   const images = document.getElementsByTagName("img");
+  console.log(images[2].offsetLeft)
+  let pictureWidth=0;
+  var imagesOffsetX=[], imagesOffsetY=[];
+  for (let i = 0; i < images.length; i++) {
+    imagesOffsetX[i]=images[i].offsetLeft;
+    imagesOffsetY[i]=images[i].offsetTop;
+  console.log(imagesOffsetX);
+  console.log(imagesOffsetY)
+  }
+
+  for (let i = 0; i < images.length; i++){
+    //настройка для абсолютного позиционирования и отображения как в изначальном варианте
+        images[i].style.position='absolute';
+        images[i].style.left=imagesOffsetX[i]+'px';
+        images[i].style.top=imagesOffsetY[i]+'px';
+        
+        console.log(images[3])
+        //bufWidth+=images[i].offsetWidth;
+        
+      
+      images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
+      images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
+      //images[i].style.zIndex = i; //присваиваем каждому z-index
+
+  }
+    
+
+
 
 window.addEventListener("mousemove", mouseMove);
 
@@ -36,23 +64,6 @@ let Mouse = {
   zIndexBuf: null, //для запоминания положения на странице
 };
 
-let pictureWidth=0;
-var bufWidth=2;
-for (let i = 0; i < images.length; i++) {
-
-    //настройка для абсолютного позиционирования и отображения как в изначальном варианте
-    images[i].style.position='absolute';
-    images[i].style.left=bufWidth+'px';
-    
-    console.log(images[3])
-    bufWidth+=images[i].offsetWidth;
-    
-    console.log(images[i].offsetHeight)
-    images[i].style.top=262-images[i].offsetHeight+'px';
-  images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
-  images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
-  //images[i].style.zIndex = i; //присваиваем каждому z-index
-}
 
 function imageMouseDown(event) {
   if (event.button == 0) {
