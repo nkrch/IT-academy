@@ -21,38 +21,49 @@
 
     <script>
       // здесь ваш код
-
+      
       const images = document.getElementsByTagName("img");
-console.log(document.readyState)
+      
+      for (let i = 0; i < images.length; i++) {
+        //images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
+        images[i].addEventListener('mousedown',imageMouseDown)
+        
+        images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
+        //images[i].style.zIndex = i; //присваиваем каждому z-index
+      }
       
 
-        
-        console.log(images[2].offsetLeft);
-        
+      function a() {
+        console.log(document.readyState+' ready state')
         var imagesOffsetX = [],
           imagesOffsetY = [];
-          //console.log(images[3].onload)
+        //console.log(images[3].onload)
+
         for (let i = 0; i < images.length; i++) {
           imagesOffsetX[i] = images[i].offsetLeft;
           imagesOffsetY[i] = images[i].offsetTop;
           console.log(imagesOffsetX);
           console.log(imagesOffsetY);
           //настройка для абсолютного позиционирования и отображения как в изначальном варианте
-          images[i].style.position = "absolute";
-          images[i].style.left = imagesOffsetX[i] + "px";
-          images[i].style.top = imagesOffsetY[i] + "px";
+          
 
           console.log(images[3]);
           //bufWidth+=images[i].offsetWidth;
-
-          images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
-          images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
-          //images[i].style.zIndex = i; //присваиваем каждому z-index
         }
+
+        for (let i = 0; i < images.length; i++) {
+        images[i].style.position = "absolute";
+          images[i].style.left = imagesOffsetX[i] + "px";
+          images[i].style.top = imagesOffsetY[i] + "px";
+      }
+
+      };
+
       
+      console.log(images[2].offsetLeft);
 
       window.addEventListener("mousemove", mouseMove);
-      
+
       function mouseMove(event) {
         if (Mouse.left) {
           Mouse.posX = event.clientX; // текущая координата по оси Х
@@ -72,6 +83,7 @@ console.log(document.readyState)
         zIndexBuf: null, //для запоминания положения на странице
       };
 
+      console.log(document.readyState);
       function imageMouseDown(event) {
         if (event.button == 0) {
           this.style.cursor = "pointer";
@@ -90,7 +102,7 @@ console.log(document.readyState)
           Mouse.dx = event.layerX;
           console.log(Mouse.dx, Mouse.posX);
           Mouse.dy = event.layerY;
-
+          console.log(document.readyState);
           imageMove();
         }
       }
@@ -101,6 +113,7 @@ console.log(document.readyState)
         this.style.zIndex = Mouse.zIndexBuf;
         Mouse.targetImage = null;
         Mouse.zIndexBuf = null;
+        console.log(document.readyState);
       }
 
       function imageMove() {
@@ -110,6 +123,12 @@ console.log(document.readyState)
           Mouse.targetImage.style.left = Mouse.posX - Mouse.dx + "px";
         }
       }
+
+      setTimeout(() => {
+        if (document.readyState='complete') {
+        a()
+      }
+      }, 1000);
       
     </script>
   </body>
