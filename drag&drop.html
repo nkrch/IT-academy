@@ -23,12 +23,13 @@
       // здесь ваш код
       
       const images = document.getElementsByTagName("img");
-      
+      var zIndexMax=images.length*2;
       for (let i = 0; i < images.length; i++) {
         //images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
         images[i].addEventListener('mousedown',imageMouseDown)
         
         images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
+        images[i].onmousemove = mouseMove; 
         //images[i].style.zIndex = i; //присваиваем каждому z-index
       }
       
@@ -81,6 +82,7 @@
         dy: null,
         left: false,
         zIndexBuf: null, //для запоминания положения на странице
+        
       };
 
       console.log(document.readyState);
@@ -91,7 +93,8 @@
           Mouse.targetImage = this;
           Mouse.zIndexBuf = this.style.zIndex;
           console.log(Mouse.zIndexBuf);
-          this.style.zIndex = 5;
+          this.style.zIndex = zIndexMax;
+          zIndexMax++;
 
           Mouse.left = true;
 
@@ -110,7 +113,7 @@
       function imageMouseUp() {
         this.style.cursor = "default";
         Mouse.left = false;
-        this.style.zIndex = Mouse.zIndexBuf;
+        //this.style.zIndex = Mouse.zIndexBuf;
         Mouse.targetImage = null;
         Mouse.zIndexBuf = null;
         console.log(document.readyState);
