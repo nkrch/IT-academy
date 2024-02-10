@@ -23,7 +23,7 @@
       // здесь ваш код
       
       const images = document.getElementsByTagName("img");
-      var zIndexMax=images.length*2;
+      var zIndexMax=images.length;
       for (let i = 0; i < images.length; i++) {
         //images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
         images[i].addEventListener('mousedown',imageMouseDown)
