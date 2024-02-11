@@ -25,12 +25,7 @@
       const images = document.getElementsByTagName("img");
       var zIndexMax = images.length * 2;
       for (let i = 0; i < images.length; i++) {
-        //images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
         images[i].addEventListener("mousedown", imageMouseDown);
-
-        images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
-        images[i].onmousemove = mouseMove;
-        //images[i].style.zIndex = i; //присваиваем каждому z-index
       }
 
       function a() {
@@ -63,8 +58,10 @@
         if (Mouse.left) {
           Mouse.posX = event.clientX; // текущая координата по оси Х
           Mouse.posY = event.clientY; // текущая координата по оси Y
+
           imageMove();
         }
+        this.addEventListener("mouseup", imageMouseUp);
       }
 
       //введём объект, который будет хранить в себе целевое изображение, начальные и настоящие x и y, нажата ли кнопка мыши, исконный zIndex
@@ -80,6 +77,7 @@
 
       console.log(document.readyState);
       function imageMouseDown(event) {
+        this.removeEventListener("mousedown", imageMouseDown);
         if (event.button == 0) {
           this.style.cursor = "pointer";
           event.preventDefault();
@@ -99,20 +97,23 @@
           console.log(Mouse.dx, Mouse.posX);
           Mouse.dy = event.layerY;
           console.log(document.readyState);
-          imageMove();
+          this.addEventListener("mousemove", mouseMove);
         }
       }
 
       function imageMouseUp() {
+        this.addEventListener("mousedown", imageMouseDown);
         this.style.cursor = "default";
         Mouse.left = false;
         //this.style.zIndex = Mouse.zIndexBuf;
         Mouse.targetImage = null;
         Mouse.zIndexBuf = null;
         console.log(document.readyState);
+        this.removeEventListener("mouseup", imageMouseUp);
       }
 
       function imageMove() {
+        this.removeEventListener("mousemove", mouseMove);
         if (Mouse.left) {
           //двигаем изображение
           Mouse.targetImage.style.top = Mouse.posY - Mouse.dy + "px";
