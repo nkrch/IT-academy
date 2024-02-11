@@ -21,21 +21,20 @@
 
     <script>
       // здесь ваш код
-      
+
       const images = document.getElementsByTagName("img");
-      var zIndexMax=images.length;
+      var zIndexMax = images.length * 2;
       for (let i = 0; i < images.length; i++) {
         //images[i].onmousedown = imageMouseDown; //обработчик события onmousedown
-        images[i].addEventListener('mousedown',imageMouseDown)
-        
+        images[i].addEventListener("mousedown", imageMouseDown);
+
         images[i].onmouseup = imageMouseUp; //обработчик события onmouseup
-        images[i].onmousemove = mouseMove; 
+        images[i].onmousemove = mouseMove;
         //images[i].style.zIndex = i; //присваиваем каждому z-index
       }
-      
 
       function a() {
-        console.log(document.readyState+' ready state')
+        console.log(document.readyState + " ready state");
         var imagesOffsetX = [],
           imagesOffsetY = [];
         //console.log(images[3].onload)
@@ -46,24 +45,19 @@
           console.log(imagesOffsetX);
           console.log(imagesOffsetY);
           //настройка для абсолютного позиционирования и отображения как в изначальном варианте
-          
 
           console.log(images[3]);
           //bufWidth+=images[i].offsetWidth;
         }
 
         for (let i = 0; i < images.length; i++) {
-        images[i].style.position = "absolute";
+          images[i].style.position = "absolute";
           images[i].style.left = imagesOffsetX[i] + "px";
           images[i].style.top = imagesOffsetY[i] + "px";
+        }
       }
 
-      };
-
-      
       console.log(images[2].offsetLeft);
-
-      window.addEventListener("mousemove", mouseMove);
 
       function mouseMove(event) {
         if (Mouse.left) {
@@ -82,7 +76,6 @@
         dy: null,
         left: false,
         zIndexBuf: null, //для запоминания положения на странице
-        
       };
 
       console.log(document.readyState);
@@ -127,12 +120,11 @@
         }
       }
 
-      window.onload=(() => {
-        if (document.readyState='complete') {
-        a()
-      }
-      });
-      
+      window.onload = () => {
+        if ((document.readyState = "complete")) {
+          a();
+        }
+      };
     </script>
   </body>
 </html>
