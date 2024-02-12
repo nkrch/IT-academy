@@ -96,12 +96,12 @@
           console.log(Mouse.dx, Mouse.posX);
           Mouse.dy = event.layerY;
           console.log(document.readyState);
-          this.addEventListener("mousemove", mouseMove);
+          window.addEventListener("mousemove", mouseMove);
         }
       }
 
       function imageMouseUp() {
-        this.removeEventListener("mousemove", mouseMove);
+        window.removeEventListener("mousemove", mouseMove);
         this.style.cursor = "default";
         Mouse.left = false;
         //this.style.zIndex = Mouse.zIndexBuf;
