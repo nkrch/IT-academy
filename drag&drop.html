@@ -26,6 +26,7 @@
       var zIndexMax = images.length * 2;
       for (let i = 0; i < images.length; i++) {
         images[i].addEventListener("mousedown", imageMouseDown);
+        images[i].addEventListener("mouseup", imageMouseUp);
       }
 
       function a() {
@@ -61,7 +62,6 @@
 
           imageMove();
         }
-        this.addEventListener("mouseup", imageMouseUp);
       }
 
       //введём объект, который будет хранить в себе целевое изображение, начальные и настоящие x и y, нажата ли кнопка мыши, исконный zIndex
@@ -77,13 +77,12 @@
 
       console.log(document.readyState);
       function imageMouseDown(event) {
-        this.removeEventListener("mousedown", imageMouseDown);
         if (event.button == 0) {
           this.style.cursor = "pointer";
           event.preventDefault();
           Mouse.targetImage = this;
           Mouse.zIndexBuf = this.style.zIndex;
-          console.log(Mouse.zIndexBuf);
+          console.log(Mouse.targetImage);
           this.style.zIndex = zIndexMax;
           zIndexMax++;
 
@@ -102,19 +101,17 @@
       }
 
       function imageMouseUp() {
-        this.addEventListener("mousedown", imageMouseDown);
+        this.removeEventListener("mousemove", mouseMove);
         this.style.cursor = "default";
         Mouse.left = false;
         //this.style.zIndex = Mouse.zIndexBuf;
         Mouse.targetImage = null;
         Mouse.zIndexBuf = null;
         console.log(document.readyState);
-        this.removeEventListener("mouseup", imageMouseUp);
       }
 
       function imageMove() {
-        this.removeEventListener("mousemove", mouseMove);
-        if (Mouse.left) {
+        if (Mouse.left && Mouse.targetImage != null) {
           //двигаем изображение
           Mouse.targetImage.style.top = Mouse.posY - Mouse.dy + "px";
           Mouse.targetImage.style.left = Mouse.posX - Mouse.dx + "px";
