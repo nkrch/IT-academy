@@ -9,6 +9,7 @@
   <body>
     <div id="container">
       <main>
+        <h2>2048</h2>
         <div id="gameField"></div>
       </main>
     </div>
@@ -19,7 +20,18 @@
       <button>Global Top</button>
       <button>Saved Games</button>
     </menu>
-    <dialog></dialog>
+
+    <div id="dialog">
+      <div id="modal">
+        <p>CHOOSE</p>
+        <div>
+          <button onclick="modal(3)">3x3</button>
+          <button onclick="modal(4)">4x4</button>
+          <button onclick="modal(5)">5x5</button>
+          <button onclick="modal(6)">6x6</button>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="script.js"></script>
 </html>
