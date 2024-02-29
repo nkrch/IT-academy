@@ -120,12 +120,18 @@ function clockBuild(size) {
 
 function clockGo() {
   const time = new Date();
-
+  console.log(time);
+  console.log(
+    time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+  );
   timeString.innerText = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
   const secAngle = (360 / 60) * time.getSeconds();
   const minAngle = (360 / 60) * time.getMinutes();
-  const hourAngle =
-    (deg360 / 12) * time.getHours() + (deg360 / 12 / 60) * time.getMinutes();
+  let hourAngle;
+
+  hourAngle =
+    (360 / 12) * time.getHours() + (360 / 12 / 60) * time.getMinutes();
+
   secElem.style.transform = `rotate(${secAngle}deg)`;
   minElem.style.transform = `rotate(${minAngle}deg)`;
   hourElem.style.transform = `rotate(${hourAngle}deg)`;

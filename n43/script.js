@@ -7,7 +7,7 @@ const playerSizes = {
   playerHeight: fieldSizes.fieldHeight * 0.2,
   ballSizes: fieldSizes.fieldWidth * 0.1,
 };
-let timer;
+let thePlay = false;
 let count1 = 0,
   count2 = 0;
 const field = document.getElementById("field");
@@ -49,72 +49,8 @@ function creation(elem) {
   field.insertAdjacentElement("afterbegin", elem);
 }
 
-window.addEventListener("keydown", move);
-
-function move() {
-  let evnt, player;
-  window.removeEventListener("keydown", move);
-
-  switch (event.key) {
-    case "Shift":
-      evnt = "up";
-      player = player1;
-
-      break;
-
-    case "Control":
-      evnt = "down";
-      player = player1;
-
-      break;
-
-    case "ArrowUp":
-      evnt = "up";
-      player = player2;
-      break;
-    case "ArrowDown":
-      evnt = "down";
-      player = player2;
-      break;
-    default:
-      break;
-  }
-  moveDoing();
-
-  function moveDoing() {
-    console.log("doing");
-    timer = setInterval(changing, 25);
-
-    window.addEventListener("keyup", onUp);
-    window.addEventListener("keydown", onUp);
-    function changing(params) {
-      switch (evnt) {
-        case "up":
-          if (player.offsetTop - 3 > coordinates.highest) {
-            player.style.top = player.offsetTop - 5 + "px";
-          }
-          break;
-        case "down":
-          if (player.offsetTop + player.offsetHeight + 3 < coordinates.lowest) {
-            player.style.top = player.offsetTop + 5 + "px";
-          }
-
-          break;
-        default:
-          break;
-      }
-    }
-
-    function onUp() {
-      clearInterval(timer);
-      window.removeEventListener("keydown", onUp);
-      window.removeEventListener("keyup", onUp);
-      window.addEventListener("keydown", move);
-    }
-  }
-}
-
 window.onload = prestart();
+
 player1.insertAdjacentElement("afterend", ball);
 function prestart() {
   //ball
@@ -128,91 +64,85 @@ function prestart() {
   ball.style.top = coordinates.center.y - playerSizes.ballSizes / 2 + "px";
   ball.style.left = coordinates.center.x - playerSizes.ballSizes / 2 + "px";
 }
-let ballTimer;
-function start() {
-  prestart();
-  clearInterval(ballTimer);
+let speedR = {
+    1: 0,
+    2: 0,
+  },
+  speedB = {
+    x: 0,
+    y: 0,
+  };
+
+setInterval(movingAll, 25);
+function movingAll() {
+  ball.style.top = ball.offsetTop + speedB.y + "px";
+  ball.style.left = ball.offsetLeft + speedB.x + "px";
+  player1.style.top = player1.offsetTop + speedR[1] + "px";
+  player2.style.top = player2.offsetTop + speedR[2] + "px";
+
   //ball moving and physics
-  let isMoving = true;
-
-  let angle = (Math.random() * 2 - 1) * Math.PI;
-  console.log(angle);
-  ballTimer = setInterval(movingBall, 10);
-
-  function movingBall() {
-    if (
-      ball.offsetTop - 3 < coordinates.highest ||
-      Math.cos(angle) > 0.9 ||
-      Math.sin(angle) > 0.95
-    ) {
-      angle = -angle + Math.PI;
-      //ball.style.top = ball.offsetTop + 1 / Math.cos(angle) + "px";
-      console.log("alarm");
-      ball.style.top = ball.offsetTop + 4 * Math.cos(angle) + "px";
-      ball.style.left = ball.offsetLeft + 4 * Math.sin(angle) + "px";
-
-      //to the top
-    } else if (
-      ball.offsetTop + ball.offsetHeight + 3 > coordinates.lowest ||
-      Math.cos(angle) > 0.9 ||
-      Math.sin(angle) > 0.95
-    ) {
-      console.log("alarm");
-      angle = Math.PI - angle;
-
-      ball.style.top = ball.offsetTop + 3 * Math.cos(angle) + "px";
-      ball.style.left = ball.offsetLeft + 3 * Math.sin(angle) + "px";
-      //to the bottom
-    } else {
-      //basic
-      ball.style.top = ball.offsetTop + 2 * Math.cos(angle) + "px";
-      ball.style.left = ball.offsetLeft + 2 * Math.sin(angle) + "px";
-      console.log(`angle: ${angle}
-        sin: ${Math.sin(angle)}
-        cos: ${Math.cos(angle)}`);
-    }
-    console.log(ball.offsetLeft);
-
-    if (
-      ball.offsetLeft + ball.offsetWidth >
-        coordinates.rightest - player2.offsetWidth ||
-      ball.offsetLeft < coordinates.leftest + player1.offsetWidth
-    ) {
-      if (
-        ball.offsetTop >= player2.offsetTop &&
-        ball.offsetTop <= player2.offsetTop + player2.offsetHeight
-      ) {
-        angle = -angle;
-        ball.style.top = ball.offsetTop + 2 * Math.cos(angle) + "px";
-        ball.style.left = ball.offsetLeft + 2 * Math.sin(angle) + "px";
-      } else if (
-        ball.offsetLeft + ball.offsetWidth + 3 >
-        coordinates.rightest
-      ) {
-        count(1);
-        clearInterval(ballTimer);
-      }
-
-      //player 1
-      if (
-        (ball.offsetTop >= player1.offsetTop &&
-          ball.offsetTop <= player1.offsetTop + player1.offsetHeight) ||
-        (ball.offsetTop + ball.offsetHeight >= player1.offsetTop &&
-          ball.offsetTop + ball.offsetHeight <=
-            player1.offsetTop + player1.offsetHeight)
-      ) {
-        angle = -angle;
-        ball.style.top = ball.offsetTop + 2 * Math.cos(angle) + "px";
-        ball.style.left = ball.offsetLeft + 2 * Math.sin(angle) + "px";
-      } else if (ball.offsetLeft - 3 < field.offsetLeft) {
-        count(2);
-        clearInterval(ballTimer);
-      }
-      //
-    }
+  if (
+    ball.offsetTop + ball.offsetHeight + 4 >=
+      field.offsetHeight + field.offsetTop ||
+    ball.offsetTop - 4 <= field.offsetTop
+  ) {
+    speedB.y = speedB.y * -1;
+    console.log(speedB.y);
   }
+
   count();
+
+  //ball confronts players
+  if (
+    (ball.offsetLeft + ball.offsetWidth + 1 >= player2.offsetLeft &&
+      ball.offsetHeight + ball.offsetTop >= player2.offsetTop &&
+      ball.offsetTop <= player2.offsetTop + player2.offsetHeight) ||
+    (ball.offsetLeft - 1 <= player1.offsetLeft + player1.offsetWidth &&
+      ball.offsetHeight + ball.offsetTop >= player1.offsetTop &&
+      ball.offsetTop <= player1.offsetTop + player1.offsetHeight)
+  ) {
+    speedB.x = -speedB.x;
+  }
+
+  //player 1 confronts walls
+  if (
+    (player1.offsetTop - 1 <= field.offsetTop && speedR[1] < 0) ||
+    (player1.offsetTop + player1.offsetHeight + 1 >=
+      field.offsetHeight + field.offsetTop &&
+      speedR[1] > 0)
+  ) {
+    speedR[1] = 0;
+  }
+
+  //player 2 confronts walls
+  if (
+    (player2.offsetTop - 1 <= field.offsetTop && speedR[2] < 0) ||
+    (player2.offsetTop + player2.offsetHeight + 1 >=
+      field.offsetHeight + field.offsetTop &&
+      speedR[2] >= 0)
+  ) {
+    speedR[2] = 0;
+  }
+
   //ball confronts walls
+
+  if (ball.offsetLeft - 1 <= field.offsetLeft && thePlay == true) {
+    thePlay = false;
+    speedB.x = 0;
+    speedB.y = 0;
+    count(2);
+  }
+  if (
+    ball.offsetLeft + ball.offsetWidth + 1 >=
+      field.offsetLeft + field.offsetWidth &&
+    thePlay == true
+  ) {
+    thePlay = false;
+    speedB.x = 0;
+    speedB.y = 0;
+    count(1);
+  }
+
   function count(num) {
     countP.style.left = coordinates.center.x + "px";
     countP.style.top = coordinates.highest - countP.offsetHeight + "px";
@@ -228,5 +158,90 @@ function start() {
     }
     countP.innerText = count1 + ":" + count2;
   }
+}
+
+function start() {
+  thePlay = true;
+  prestart();
+  let bool = Math.floor(Math.random() * 2) === 0;
+  if (bool) {
+    speedB.x = 4;
+  } else {
+    speedB.x = -4;
+  }
+  bool = Math.floor(Math.random() * 2) === 0;
+  if (bool) {
+    speedB.y = 4;
+  } else {
+    speedB.y = -4;
+  }
+
   // !!!!!!!clear clearInterval!!!!!!!
 }
+
+//нажатие на кнопку
+
+function btnDown() {
+  console.log(event);
+  let thiscase = event.key;
+  console.log(event.key);
+  //speedR = 2;
+  window.addEventListener("keyup", btnUp);
+  switch (event.key) {
+    case "Control":
+      speedR[1] = 4;
+      break;
+    case "Shift":
+      speedR[1] = -4;
+      break;
+    case "ArrowUp":
+      speedR[2] = -4;
+      break;
+    case "ArrowDown":
+      speedR[2] = 4;
+      break;
+    default:
+      break;
+  }
+  function btnUp() {
+    switch (event.key) {
+      case "Control":
+        speedR[1] = 0;
+        break;
+      case "Shift":
+        speedR[1] = 0;
+        break;
+      case "ArrowUp":
+        speedR[2] = 0;
+        break;
+      case "ArrowDown":
+        speedR[2] = 0;
+        break;
+      default:
+        break;
+    }
+  }
+
+  //player 1 confronts walls
+  if (
+    (player1.offsetTop - 1 <= field.offsetTop && speedR[1] < 0) ||
+    (player1.offsetTop + player1.offsetHeight + 1 >=
+      field.offsetHeight + field.offsetTop &&
+      speedR[1] > 0)
+  ) {
+    speedR[1] = 0;
+  }
+
+  //player 2 confronts walls
+  if (
+    (player2.offsetTop - 4 <= field.offsetTop && speedR[2] < 0) ||
+    (player2.offsetTop + player2.offsetHeight + 2 >=
+      field.offsetHeight + field.offsetTop &&
+      speedR[2] >= 0)
+  ) {
+    speedR[2] = 0;
+  }
+}
+
+//test
+window.addEventListener("keydown", btnDown);
