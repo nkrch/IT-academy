@@ -2,8 +2,6 @@ const modalW = document.getElementById("dialog");
 const game = document.getElementById("gameField");
 
 function modal(num) {
-  console.log(num);
-
   //animation
   modalW.style.opacity = 0;
   modalW.style.transitionDuration = "0.6s";
@@ -38,4 +36,5 @@ function modal(num) {
     game.style.gridTemplateRows = gridStr;
     game.style.gap = gap + "px " + gap + "px";
   }
+  return num;
 }

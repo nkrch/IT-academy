@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>2048</title>
+  </head>
+  <body>
+    <article></article>
+    <div id="container">
+      <main>
+        <header>
+          <h2>
+          <div id="two">2</div>
+          <div id="zero">0</div>
+          <div id="four">4</div>
+          <div id="eight">8</div>
+        </h2>
+        <div id="scoreCont">
+          <h5>Score:</h5>
+          <p id="score">00000000</p>
+        </header>
+        
+        
+
+        <div id="gameField"></div>
+      </main>
+    </div>
+
+    <div id="moveMenu"></div>
+    <menu>
+      <a href="/mainProject/menu/menu.html">Back to menu</a>
+      <a>Global Top</a>
+      <a>Saved Games</a>
+    </menu>
+
+    <div id="dialog">
+      <div id="modal">
+        <p>CHOOSE</p>
+        <div>
+          <button onclick="modal(3); setNum(3)">3x3</button>
+          <button onclick="modal(4);setNum(4)">4x4</button>
+          <button onclick="modal(5);setNum(5)">5x5</button>
+          <button onclick="modal(6);setNum(6)">6x6</button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="/mainProject/js/theNum.js"></script>
+  <script src="/mainProject/js/color.js"></script>
+  <script src="/mainProject/js/moves.js"></script>
+  <script src="/mainProject/js/windows.js"></script>
+  <script src="/mainProject/js/game.js"></script>
+  <script src="/mainProject/menu/menu.js"></script>
+  <script src="/mainProject/js/sum.js"></script>
+  <script src="/mainProject/js/localStor.js"></script>
+</html>
