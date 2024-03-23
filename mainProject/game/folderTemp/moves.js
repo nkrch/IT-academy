@@ -1,61 +1,3 @@
-function swtchCase(ev) {
-  numArr.forEach((elem) => {
-    elem.addr.transitionDuration = 400 + "ms";
-  });
-  switch (ev.key) {
-    case "ArrowUp":
-      up();
-
-      break;
-    case "w":
-      up();
-
-      break;
-    case "W":
-      up();
-
-      break;
-    case "ArrowDown":
-      down();
-
-      break;
-    case "s":
-      down();
-
-      break;
-    case "S":
-      down();
-
-      break;
-    case "ArrowLeft":
-      left();
-
-      break;
-    case "a":
-      left();
-
-      break;
-    case "A":
-      left();
-
-      break;
-    case "ArrowRight":
-      right();
-
-      break;
-    case "d":
-      right();
-
-      break;
-    case "D":
-      right();
-
-      break;
-    default:
-      break;
-  }
-}
-
 function up() {
   //костыль
   for (let n = 0; n < numar; n++) {
@@ -74,15 +16,15 @@ function down(params) {
       if (!dotsArr[i].isFree && dotsArr[i + numar].isFree) {
         moveElem(i, i + numar);
         /*let a = searchElem(i);
-    
-            if (numArr[a].position == i) {
-              wasChanched = true;
-    
-              numArr[a].addr.style.top = dotsArr[i + numar].addr.offsetTop + "px";
-              dotsArr[i + numar].isFree = false;
-              dotsArr[i].isFree = true;
-              numArr[a].position = i + numar;
-            }*/
+
+        if (numArr[a].position == i) {
+          wasChanched = true;
+
+          numArr[a].addr.style.top = dotsArr[i + numar].addr.offsetTop + "px";
+          dotsArr[i + numar].isFree = false;
+          dotsArr[i].isFree = true;
+          numArr[a].position = i + numar;
+        }*/
       }
     }
   }
@@ -143,3 +85,16 @@ function moveElem(moving, moveTo) {
   }
   console.log(checkFreeDots());
 }
+
+function checkFree() {
+  let ISOVER = true;
+  for (let i = 0; i < dotsArr.length; i++) {
+    if (dotsArr[i].isFree) {
+      ISOVER = false;
+      isOver();
+    }
+  }
+  return ISOVER;
+}
+
+function isOver() {}

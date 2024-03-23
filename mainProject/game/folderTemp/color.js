@@ -14,6 +14,10 @@ const colorsBack = {
 function colorFuncF(numELEM) {
   numArr[numELEM].addr.style.backgroundColor =
     colorsBack[numArr[numELEM].value];
+
+  if (numArr[numELEM].value > 2048) {
+    numArr[numELEM].addr.style.backgroundColor = colorsBack[2048];
+  }
 }
 
 const h3 = [

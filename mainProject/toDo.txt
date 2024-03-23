@@ -1,29 +1,13 @@
-MECHANICS:
-***MOVEMENTS MAKE NORMAL
-* ADD localStorage and save
-* ADD start the previous game and start new game
+MECHANICS
+    SUM
+    
+    ANIMATIONS
+    * solve the problem with no-move 
 
-VISUALS:
+    SAVES
+    *localStorage work till the end
 
-* ADD themes
-
-MOBILE
-
-FINALS: TESTTESTTEST
-
-
-***BUGS***
-*FIX AT FIRST POINT
-RIGHT UP WORKS
-RIGHT END DOESN'T
-
-UP AND DOWN DOESN'T WORKS PROPERLY
-
-LEFT FIX ALL
-
-themes: remove this epileptical move
-
-
-добавить вибрацию
-тачскрин
-работоспособность на телефоне
+OTHER SHIT
+    * svg
+    * sound
+    * уведомление о несохранении данных при выходе!!!

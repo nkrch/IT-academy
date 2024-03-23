@@ -1,17 +1,25 @@
-const modalW = document.getElementById("dialog");
-const game = document.getElementById("gameField");
-
 function modal(num) {
+  numar = num;
   //animation
+
+  console.log("newGame");
   modalW.style.opacity = 0;
   modalW.style.transitionDuration = "0.6s";
   grid(num);
   setTimeout(modalDisap, 600);
 
+  return num;
+
   function modalDisap(params) {
     modalW.style.position = "unset";
   }
   function grid(num) {
+    window.onbeforeunload = function (event) {
+      event.preventDefault();
+      saveData(true);
+      alert("Данные не сохранены. Точно перейти?");
+    };
+
     let gridStr = "";
     let gap;
     let width = game.offsetWidth - 50;
@@ -36,5 +44,4 @@ function modal(num) {
     game.style.gridTemplateRows = gridStr;
     game.style.gap = gap + "px " + gap + "px";
   }
-  return num;
 }

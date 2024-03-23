@@ -1,0 +1,28 @@
+@media screen and (max-width: 900px) {
+    body{
+        position:fixed;
+    }
+    #left{
+        scale: 0.9;
+        
+    }
+    main{
+        scale: 0.72;
+        margin-left: -12px;
+    }
+    html{
+        display: flex;
+    }
+    header{
+        height: 9%;
+        width: 90%;
+    }
+    #scoreCont h5{
+margin: 0;
+padding: 0;
+    }
+    #score{
+        margin: 0;
+padding: 0;
+    }
+}

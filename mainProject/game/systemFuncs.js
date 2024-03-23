@@ -1,3 +1,34 @@
+function randomDiap(n, m) {
+  return Math.floor(Math.random() * (m - n + 1)) + n;
+}
+
+function searchElem(i) {
+  let forSend = null;
+  numArr.forEach((element) => {
+    if (element.position == i) {
+      forSend = numArr.indexOf(element);
+    }
+  });
+
+  return forSend;
+}
+
+function checkFree() {
+  let ISOVER = true;
+  for (let i = 0; i < dotsArr.length; i++) {
+    if (dotsArr[i].isFree) {
+      ISOVER = false;
+    }
+  }
+  return ISOVER;
+}
+
+function zeroing(params) {
+  numArr.forEach((element) => {
+    element.wasSum = false;
+  });
+}
+
 function setNum(num) {
   //basic data span
   numar = num;
@@ -13,17 +44,19 @@ function setNum(num) {
 }
 
 function spanTheNum() {
+  console.log(checkFreeDots());
   if (checkFreeDots()) {
     let newNum = numArr.length;
     let se = randomIntFromInterval(0, dotsArr.length - 1);
 
     const templ = dotsArr[se].addr;
     dotsArr[se].isFree = false;
-    console.log(dotsArr[se].isFree);
+
     numArr[newNum] = {
       addr: document.createElement("div"),
       position: se,
       value: 2,
+      wasSumed: true,
     };
     numArr[newNum].addr.className = "numberBlock";
     numArr[newNum].addr.id = "nB" + newNum;
@@ -46,6 +79,7 @@ function spanTheNum() {
   } else {
     console.log("nothing is free");
   }
+  checkFree();
 }
 
 function randomIntFromInterval(min, max) {
