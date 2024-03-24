@@ -1,6 +1,6 @@
 function swtchCase(ev) {
   numArr.forEach((elem) => {
-    elem.addr.transitionDuration = 400 + "ms";
+    elem.addr.transitionDuration = 320 + "ms";
   });
   switch (ev.key) {
     case "ArrowUp":

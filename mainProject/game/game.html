@@ -11,7 +11,7 @@
   <body>
     <article></article>
     <div id="container">
-      <main>
+      <main onpointerdown="touchStart(event)" onpointermove="touchMove(event)" onpointerleave="touchEnd(event)">
         <header>
           <h2>
           <div id="two">2</div>
@@ -26,7 +26,7 @@
         
         
 
-        <div id="gameField"></div>
+        <div id="gameField" ></div>
       </main>
     </div>
 
@@ -52,7 +52,7 @@
   <script src="winLose.js"></script>
   <script src="systemFuncs.js"></script>
   <script src="visual.js"></script>
-  
+  <script src="mobile.js"></script>
   <script src="game.js"></script>
 
   

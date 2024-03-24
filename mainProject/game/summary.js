@@ -1,5 +1,8 @@
 function summary(ev) {
-  ev.preventDefault();
+  if (ev.type!='noPrev') {
+    ev.preventDefault();
+  }
+  
   switch (ev.key) {
     case "ArrowUp":
       upSum();
@@ -53,16 +56,19 @@ function summary(ev) {
       break;
   }
   //
-
-  if (wasChanched) {
+setTimeout(()=>swtchCase(ev),1);
+  setTimeout(() => {
+    if (wasChanched) {
     spanTheNum();
-    setTimeout(swtchCase(ev), 1000);
+    
     scoreFunc(250);
   }
   console.log("is over: " + checkFree());
   if (checkFree() && !finalCheck()) {
     finishTheGame("lost");
   }
+  }, 120);
+  
 }
 
 function upSum(params) {
