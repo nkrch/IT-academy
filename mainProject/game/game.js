@@ -24,9 +24,7 @@ function onKey(ev) {
     swtchCase(ev);
     summary(ev);
   }
-  setTimeout(() => {
-    moving = false;
-  }, 220);
+  
 }
 
 function scoreFunc(meaning) {

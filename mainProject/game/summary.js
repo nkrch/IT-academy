@@ -55,12 +55,13 @@ function summary(ev) {
     case "default":
       break;
   }
+  
   //
 setTimeout(()=>swtchCase(ev),1);
   setTimeout(() => {
     if (wasChanched) {
     spanTheNum();
-    
+   
     scoreFunc(250);
   }
   console.log("is over: " + checkFree());
@@ -68,7 +69,13 @@ setTimeout(()=>swtchCase(ev),1);
     finishTheGame("lost");
   }
   }, 120);
-  
+
+  setTimeout(mvngF,290)
+// summary.addEventListener('ended',mvngF)
+}
+
+function mvngF(params) {
+  moving=false
 }
 
 function upSum(params) {
@@ -197,4 +204,5 @@ function sumMove(mvng, mvt, numMvng, distation) {
       delete numArr[numMvng];
     }, 50);
   }, 200);
+  
 }
