@@ -21,29 +21,47 @@ let prevX = 0,
   nowX = 0,
   nowY = 0;
 
-function touchStart(event) {
-  console.log("begin");
-  prevX = event.clientX;
-  prevY = event.clientY;
-  console.log(event.clientX);
-  console.log(event.clientY);
-}
+ 
 
-function touchMove(event) {
-  console.log(event.clientX);
-  console.log(event.clientY);
-  nowX = event.clientX;
-  nowY = event.clientY;
-}
-function touchEnd(event) {
-  console.log(event);
-  console.log(event.clientX);
-  console.log(event.clientY);
+  function startup() {
+    
+    main.addEventListener("touchstart", handleStart);
+    main.addEventListener("touchend", handleEnd);
+    
+    main.addEventListener("touchmove", handleMove);
+    console.log("Initialized.");
+  }
+  function handleStart(evt) {
+    evt.preventDefault();
 
-  findTheWay()
-}
+    console.log("touchstart.");
+    prevX=evt.touches[0].pageX
+    prevY=evt.touches[0].pageY
+    console.log(prevX)
+    console.log(prevY)
+    
+  }
 
-function findTheWay(params) {
+  document.addEventListener("DOMContentLoaded", startup);
+
+  function handleMove(evt) {
+    evt.preventDefault();
+    console.log("touchmove.");
+nowX=evt.touches[0].pageX
+nowY=evt.touches[0].pageY
+    console.log(nowX)
+    console.log(nowY)
+  }
+
+  function handleEnd(evt) {
+    evt.preventDefault();
+    console.log("touchend");
+findTheWay()
+    
+    
+  }
+
+  function findTheWay(params) {
     let percentOfChange={
         x: (nowX-prevX),
         y: (nowY-prevY)

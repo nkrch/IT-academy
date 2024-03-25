@@ -26,7 +26,7 @@ function onKey(ev) {
   }
   setTimeout(() => {
     moving = false;
-  }, 420);
+  }, 220);
 }
 
 function scoreFunc(meaning) {
