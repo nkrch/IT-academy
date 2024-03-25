@@ -15,9 +15,12 @@ function modal(num) {
   }
   function grid(num) {
     window.onbeforeunload = function (event) {
-      event.preventDefault();
-      saveData(true);
+      if (!restart) {
+        event.preventDefault();
+      
       alert("Данные не сохранены. Точно перейти?");
+      }
+      saveData(true);
     };
 
     let gridStr = "";

@@ -7,7 +7,8 @@ let numar,
   gameRes = document.createElement("div"),
   distation = 0,
   whatWindow = "none",
-  wasWin = false; //проверка было ли поле изменено
+  wasWin = false,
+  restart=false; //проверка было ли поле изменено
 
 const colorsBack = {
     4: "rgba(211, 234, 140, 0.987)",

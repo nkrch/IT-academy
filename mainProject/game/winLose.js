@@ -46,26 +46,27 @@ function finalCheck() {
 function finishTheGame(whatHappened) {
   console.log(whatWindow);
   if (whatWindow == "none" || whatWindow == "win") {
+    //gameRes=document.getElementById('gameRes')
+    console.log(gameRes)
     gameRes.style.position = "absolute";
     gameRes.style.opacity = 0;
     document
       .getElementsByTagName("body")[0]
       .insertAdjacentElement("afterbegin", gameRes);
     gameRes.style.backgroundColor = "#80808094";
-    gameRes.style.width =
-      document.getElementById("gameField").offsetWidth + "px";
-    gameRes.style.height =
-      document.getElementById("gameField").offsetHeight + "px";
-    gameRes.style.left = document.getElementById("gameField").offsetLeft + "px";
-    gameRes.style.top = document.getElementById("gameField").offsetTop + "px";
+    
+    
+      console.log(document.getElementById("gameField").clientWidth)
     setTimeout(() => {
       gameRes.style.transitionDuration = 450 + "ms";
       gameRes.style.opacity = 1;
     }, 10);
     window.addEventListener("resize", innerResChange);
+    innerResChange()
     switch (whatHappened) {
       case "lost":
         console.log("GAME LOST");
+        restart=true
         gameRes.innerHTML = `
           <div id='innerResult'>
           <h3>GAME LOST</h3>
@@ -93,12 +94,17 @@ function finishTheGame(whatHappened) {
 }
 
 function innerResChange() {
-  gameRes.style.left = document.getElementById("gameField").offsetLeft + "px";
-  gameRes.style.top = document.getElementById("gameField").offsetTop + "px";
+  console.log(screen.width)
+  
+
+
+  console.log(gameField.offsetHeight)
+  console.log(gameRes.offsetHeight)
 }
 
 function continueFunc() {}
 function restartF() {
+  restart=true;
   //в том же окне
   saveData(false);
   location.href = location.href;
