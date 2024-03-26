@@ -67,6 +67,9 @@ function finishTheGame(whatHappened) {
       case "lost":
         console.log("GAME LOST");
         restart=true
+       for (let i = 0; i < 3; i++) {
+        usualPlay()
+       }
         gameRes.innerHTML = `
           <div id='innerResult'>
           <h3>GAME LOST</h3>

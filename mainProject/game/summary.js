@@ -185,7 +185,9 @@ function sumMove(mvng, mvt, numMvng, distation) {
   //mvng - moving
   //mvt - moveTo
   wasChanched = true;
-
+  
+    usualPlay()
+  
   mvng.addr.style.zIndex = 0;
   mvng.addr.style.top = dotsArr[mvt.position].addr.offsetTop - 1.5 + "px";
   //mvng.addr.style.top = mvt.addr.offsetTop + "px";

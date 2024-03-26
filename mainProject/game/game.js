@@ -23,6 +23,9 @@ function onKey(ev) {
     moving = true;
     swtchCase(ev);
     summary(ev);
+    if (wasChanched) {
+      usualPlay()
+    }
   }
   
 }
